@@ -60,7 +60,7 @@ func GetOneTask(params string) *sql.Rows {
 }
 
 // DeleteOneTask ...
-func DeleteOneTask(params string) {
+func DeleteOneTask(params string) sql.Result {
 	db := InitDatabase()
 	stmt, err := db.Prepare("DELETE FROM animals WHERE id = $1;")
 
@@ -70,8 +70,10 @@ func DeleteOneTask(params string) {
 
 	checkErr(err1)
 
-	fmt.Println(res)
 	defer db.Close()
+
+	return res
+
 }
 
 // NewTask ...

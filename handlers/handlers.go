@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -23,20 +24,6 @@ var animals []animal
 // Home ...
 func Home(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	rows := models.GetAllTasks()
-
-	tempAnimal := animal{ID: 0, Name: "", Species: ""}
-
-	for rows.Next() {
-		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
-		fmt.Println(tempAnimal.ID, tempAnimal.Name, tempAnimal.Species)
-		if err2 != nil {
-			fmt.Println("ERROR2")
-			fmt.Println(err2)
-		}
-
-	}
-
 	t, err3 := template.ParseFiles("views/home.html")
 
 	if err3 != nil {
@@ -47,6 +34,27 @@ func Home(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 }
 
+// GetAllTasks ...
+func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows := models.GetAllTasks()
+
+	for rows.Next() {
+		//REMEMBER: using a := will redefine that slice EVERY TIME, if you want to append, to an existing slice you must use = only.
+		tempAnimal := animal{}
+
+		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
+
+		checkErr(err2)
+
+		animals = append(animals, tempAnimal)
+
+		json.NewEncoder(w).Encode(animals)
+
+		defer rows.Close()
+
+	}
+}
+
 // GetOneTask ...
 func GetOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
@@ -54,24 +62,43 @@ func GetOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	rows := models.GetOneTask(params)
 
-	tempAnimal1 := animal{ID: 0, Name: "", Species: ""}
+	tempAnimal := animal{}
 
 	for rows.Next() {
-		err2 := rows.Scan(&tempAnimal1.ID, &tempAnimal1.Name, &tempAnimal1.Species)
-		fmt.Println(tempAnimal1.ID, tempAnimal1.Name, tempAnimal1.Species)
-		if err2 != nil {
-			fmt.Println("ERROR2")
-			fmt.Println(err2)
-		}
 
+		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
+
+		checkErr(err2)
 	}
+
+	defer rows.Close()
+
+	json.NewEncoder(w).Encode(tempAnimal)
 
 }
 
-// DeleteTask ...
+// DeleteOneTask ...
 func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-	models.DeleteOneTask(ps.ByName("id"))
+	// Get the id of the record to be deleted.
+	deletedRecord := ps.ByName("id")
+
+	// Query for the rows that are going to be deleted, to display before deletion.
+	rows := models.GetOneTask(deletedRecord)
+
+	tempAnimal := animal{}
+
+	for rows.Next() {
+		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
+
+		checkErr(err2)
+	}
+
+	// fmt.Fprintf(w, "The following record was deleted: ")
+	json.NewEncoder(w).Encode(tempAnimal)
+
+	// Actually delete the record
+	models.DeleteOneTask(deletedRecord)
 
 }
 
