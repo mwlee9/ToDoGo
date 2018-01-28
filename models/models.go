@@ -84,10 +84,9 @@ func NewTask(name string, species string) {
 	stmt, err := db.Prepare("INSERT INTO ANIMALS (name, species) values ($1,$2)")
 	checkErr(err)
 
-	res, err := stmt.Exec(name, species)
+	_, err = stmt.Exec(name, species)
 
 	checkErr(err)
-	fmt.Println(res)
 
 	defer db.Close()
 

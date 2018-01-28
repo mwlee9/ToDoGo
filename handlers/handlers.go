@@ -37,6 +37,7 @@ func Home(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 // GetAllTasks ...
 func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows := models.GetAllTasks()
+	animals := animals[:0]
 
 	for rows.Next() {
 		//REMEMBER: using a := will redefine that slice EVERY TIME, if you want to append, to an existing slice you must use = only.
@@ -48,11 +49,9 @@ func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		animals = append(animals, tempAnimal)
 
-		json.NewEncoder(w).Encode(animals)
-
-		defer rows.Close()
-
 	}
+	json.NewEncoder(w).Encode(animals)
+	defer rows.Close()
 }
 
 // GetOneTask ...
@@ -111,10 +110,19 @@ func NewTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	models.NewTask(name, species)
 
+	t, err3 := template.ParseFiles("views/home.html")
+
+	if err3 != nil {
+		fmt.Println("ERROR3")
+	}
+
+	t.Execute(w, "Home")
+
 }
 
 func checkErr(err error) {
 	if err != nil {
 		fmt.Println(err)
 	}
+
 }
