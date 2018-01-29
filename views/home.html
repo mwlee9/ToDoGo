@@ -6,56 +6,55 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../static/CSS/main.css">
+    <!-- stylesheet order matters!!!! -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/CSS/main.css">
+
 
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-3" id="jumbohead">Jumbo heading</h1>
-        </div>
-    </div>
+                <div class="jumbotron">
+                    <h1 class="display-3">Todo List</h1>
+                </div>
 
     <div class="container">
         <div id="vueApp1">
             <div>
 
-                <div> 
+                <form action="/" method="post">
 
-                    <form action="/" method="post">
-                
-                        <input v-model="task" type="text" class="form-control" name="name">
-                        
-                        <input v-model="task" type="text" class="form-control" name="species">
-                
-                        <br>
-                
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        
-                
-                    </form>
-                
+                    <p>Name</p>
+                    <input type="text" class="form-control" name="name">
+
                     <br>
-                    
-                    <table style="width:100%">
-                            <tr>
-                              <th>ID</th>
-                              <th>Name</th>
-                              <th>Species</th>
-                            </tr>
-                            <tr v-for="task in tasks" @click="sub(task)">
-                              <td>[[task.ID]]</td>
-                              <td>[[task.Name]]</td>
-                              <td>[[task.Species]]</td>
-                            </tr>
-                           
-                    </table> 
-                
-                </div>
-                        
+                    <p>Species</p>
+                    <input type="text" class="form-control" name="species">
+
+                    <br>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                </form>
+
+                <br>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Species</th>
+                    </tr>
+                    <tr v-for="task in tasks" @click="sub(task)">
+                        <td>[[task.ID]]</td>
+                        <td>[[task.Name]]</td>
+                        <td>[[task.Species]]</td>
+                    </tr>
+
+                </table>
+
 
             </div>
         </div>

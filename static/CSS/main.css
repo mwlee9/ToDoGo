@@ -1,3 +1,5 @@
-p {
-    color: goldenrod;
+.jumbotron {
+    color: maroon;
+    background-color: goldenrod;
+    text-align: center;
 }
