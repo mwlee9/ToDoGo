@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/CSS/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -15,44 +15,58 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-3" id = "jumbohead" >Jumbo heading</h1>
+            <h1 class="display-3" id="jumbohead">Jumbo heading</h1>
         </div>
     </div>
-
-    <form action="/" method="post">
-        
-        <div class="container">
-        <div class="form-group">
-            <label for=""></label>
-            
-            <input type="text" class="form-control"
-                name="name" id="" aria-describedby="helpId" placeholder="">
-
-                <input type="text" class="form-control"
-                name="species" id="" aria-describedby="helpId" placeholder="">
-            
-            <br>
-            <button type="submit" class="btn btn-primary|secondary|success|danger|warning|info|light|dark|link">Submit</button>
-        </div>
-        </div>
-    
-    </form>
-
-    <form action="/all" method="get">
-        <button type="submit" class="btn btn-primary|secondary|success|danger|warning|info|light|dark|link">Get All</button>
-    </form>
 
     <div class="container">
-        <div id = "vueApp1">
-            <p><root></root></p>
+        <div id="vueApp1">
+            <div>
+
+                <div> 
+
+                    <form action="/" method="post">
+                
+                        <input v-model="task" type="text" class="form-control" name="name">
+                        
+                        <input v-model="task" type="text" class="form-control" name="species">
+                
+                        <br>
+                
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                
+                    </form>
+                
+                    <br>
+                    
+                    <table style="width:100%">
+                            <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Species</th>
+                            </tr>
+                            <tr v-for="task in tasks" @click="sub(task)">
+                              <td>[[task.ID]]</td>
+                              <td>[[task.Name]]</td>
+                              <td>[[task.Species]]</td>
+                            </tr>
+                           
+                    </table> 
+                
+                </div>
+                        
+
+            </div>
         </div>
     </div>
-    
 
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
 <script src="../static/Javascript/vue.js"></script>
 <script src="../static/Javascript/vueapp.js"></script>
+<!-- <script src="../static/Javascript/test.js"></script> -->
 
 
 </html>
