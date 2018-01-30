@@ -13,13 +13,14 @@ import (
 
 // Types - Remember, names must be capital to be exported for the json package to use.
 
-type animal struct {
-	ID      int
-	Name    string
-	Species string
+type task struct {
+	ID       int
+	Name     string
+	Body     string
+	Priority int
 }
 
-var animals []animal
+var tasks []task
 
 // Home ...
 func Home(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -37,20 +38,20 @@ func Home(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 // GetAllTasks ...
 func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows := models.GetAllTasks()
-	animals := animals[:0]
+	tasks := tasks[:0]
 
 	for rows.Next() {
 		//REMEMBER: using a := will redefine that slice EVERY TIME, if you want to append, to an existing slice you must use = only.
-		tempAnimal := animal{}
+		tempTask := task{}
 
-		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
+		err2 := rows.Scan(&tempTask.ID, &tempTask.Name, &tempTask.Body, &tempTask.Priority)
 
 		checkErr(err2)
 
-		animals = append(animals, tempAnimal)
+		tasks = append(tasks, tempTask)
 
 	}
-	json.NewEncoder(w).Encode(animals)
+	json.NewEncoder(w).Encode(tasks)
 	defer rows.Close()
 }
 
@@ -61,18 +62,18 @@ func GetOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	rows := models.GetOneTask(params)
 
-	tempAnimal := animal{}
+	tempTask := task{}
 
 	for rows.Next() {
 
-		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
+		err2 := rows.Scan(&tempTask.ID, &tempTask.Name, &tempTask.Body, &tempTask.Priority)
 
 		checkErr(err2)
 	}
 
 	defer rows.Close()
 
-	json.NewEncoder(w).Encode(tempAnimal)
+	json.NewEncoder(w).Encode(tempTask)
 
 }
 
@@ -85,16 +86,16 @@ func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	// Query for the rows that are going to be deleted, to display before deletion.
 	rows := models.GetOneTask(deletedRecord)
 
-	tempAnimal := animal{}
+	tempTask := task{}
 
 	for rows.Next() {
-		err2 := rows.Scan(&tempAnimal.ID, &tempAnimal.Name, &tempAnimal.Species)
+		err2 := rows.Scan(&tempTask.ID, &tempTask.Name, &tempTask.Body, &tempTask.Priority)
 
 		checkErr(err2)
 	}
 
 	// fmt.Fprintf(w, "The following record was deleted: ")
-	json.NewEncoder(w).Encode(tempAnimal)
+	json.NewEncoder(w).Encode(tempTask)
 
 	// Actually delete the record
 	models.DeleteOneTask(deletedRecord)
@@ -106,15 +107,14 @@ func NewTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	r.ParseForm()
 	name := r.FormValue("name")
-	species := r.FormValue("species")
+	body := r.FormValue("body")
+	priority := r.FormValue("priority")
 
-	models.NewTask(name, species)
+	models.NewTask(name, body, priority)
 
 	t, err3 := template.ParseFiles("views/home.html")
 
-	if err3 != nil {
-		fmt.Println("ERROR3")
-	}
+	checkErr(err3)
 
 	t.Execute(w, "Home")
 

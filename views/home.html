@@ -29,8 +29,12 @@
                     <input type="text" class="form-control" name="name">
 
                     <br>
-                    <p>Species</p>
-                    <input type="text" class="form-control" name="species">
+                    <p>Body</p>
+                    <input type="text" class="form-control" name="body">
+
+                    <br>
+                    <p>Priority</p>
+                    <input type="text" class="form-control" name="priority">
 
                     <br>
 
@@ -45,12 +49,14 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Species</th>
+                        <th>Body</th>
+                        <th>Priority</th>
                     </tr>
                     <tr v-for="task in tasks" @click="sub(task)">
                         <td>[[task.ID]]</td>
                         <td>[[task.Name]]</td>
-                        <td>[[task.Species]]</td>
+                        <td>[[task.Body]]</td>
+                        <td>[[task.Priority]]</td>
                     </tr>
 
                 </table>

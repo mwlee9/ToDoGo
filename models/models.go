@@ -22,11 +22,9 @@ func CreateTable() {
 	db := InitDatabase()
 
 	// _, err := db.Exec("CREATE TABLE IF NOT EXISTS animals (id SERIAL PRIMARY KEY, name TEXT, species TEXT);")
-	_, err := db.Exec("CREATE TABLE IF NOT EXISTS animals (id SERIAL PRIMARY KEY, name TEXT, species TEXT);")
+	_, err := db.Exec("CREATE TABLE IF NOT EXISTS tasks (id SERIAL PRIMARY KEY, name TEXT, body TEXT, priority INTEGER);")
 
-	if err != nil {
-		fmt.Println("ERROR")
-	}
+	checkErr(err)
 
 	defer db.Close()
 
@@ -36,11 +34,9 @@ func CreateTable() {
 func GetAllTasks() *sql.Rows {
 	db := InitDatabase()
 
-	rows, err := db.Query("SELECT * FROM animals")
+	rows, err := db.Query("SELECT * FROM tasks ORDER BY priority")
 
-	if err != nil {
-		fmt.Println("ERROR1")
-	}
+	checkErr(err)
 
 	defer db.Close()
 
@@ -50,7 +46,7 @@ func GetAllTasks() *sql.Rows {
 // GetOneTask ...
 func GetOneTask(params string) *sql.Rows {
 	db := InitDatabase()
-	rows, err := db.Query("SELECT * FROM animals WHERE id =" + `'` + params + `'`)
+	rows, err := db.Query("SELECT * FROM tasks WHERE id =" + `'` + params + `'`)
 
 	checkErr(err)
 
@@ -62,7 +58,7 @@ func GetOneTask(params string) *sql.Rows {
 // DeleteOneTask ...
 func DeleteOneTask(params string) sql.Result {
 	db := InitDatabase()
-	stmt, err := db.Prepare("DELETE FROM animals WHERE id = $1;")
+	stmt, err := db.Prepare("DELETE FROM tasks WHERE id = $1;")
 
 	checkErr(err)
 
@@ -77,14 +73,14 @@ func DeleteOneTask(params string) sql.Result {
 }
 
 // NewTask ...
-func NewTask(name string, species string) {
+func NewTask(name string, body string, priority string) {
 
 	db := InitDatabase()
 
-	stmt, err := db.Prepare("INSERT INTO ANIMALS (name, species) values ($1,$2)")
+	stmt, err := db.Prepare("INSERT INTO tasks (name, body, priority) values ($1,$2,$3)")
 	checkErr(err)
 
-	_, err = stmt.Exec(name, species)
+	_, err = stmt.Exec(name, body, priority)
 
 	checkErr(err)
 
