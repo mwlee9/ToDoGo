@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"net/http"
 
-	"../models"
+	"github.com/mwlee9/todogoml/models"
 
 	"github.com/julienschmidt/httprouter"
 )

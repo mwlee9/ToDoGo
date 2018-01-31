@@ -1,0 +1,25 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "/+6uz8Wkylv3mR7K9K2YXL1TDcU=",
+			"path": "github.com/julienschmidt/httprouter",
+			"revision": "e1b9828bc9e5904baec057a154c09ca40fe7fae0",
+			"revisionTime": "2017-10-27T13:37:09Z"
+		},
+		{
+			"checksumSHA1": "b1kh9gaXH6xYMBNfONAxqf6YCYg=",
+			"path": "github.com/lib/pq",
+			"revision": "19c8e9ad00952ce0c64489b60e8df88bb16dd514",
+			"revisionTime": "2018-01-19T15:11:48Z"
+		},
+		{
+			"checksumSHA1": "QPjV8nrnzjkHGgLYwlqYCOSbwH4=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "19c8e9ad00952ce0c64489b60e8df88bb16dd514",
+			"revisionTime": "2018-01-19T15:11:48Z"
+		}
+	],
+	"rootPath": "github.com/mwlee9/todogoml"
+}

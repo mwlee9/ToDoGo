@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"os"
 
-	"./handlers"
-	"./models"
+	"github.com/mwlee9/todogoml/handlers"
+	"github.com/mwlee9/todogoml/models"
 
 	"github.com/julienschmidt/httprouter"
 
