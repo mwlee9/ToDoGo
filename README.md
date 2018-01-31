@@ -1,1 +1,1 @@
-# Basic Todo website built on Golang
+# Calculator
