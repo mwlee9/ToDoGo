@@ -10,15 +10,18 @@ function GetAllTasks(inst) {
 }
 
 function sub(task) {
-
-    var index = this.tasks.indexOf(task);
+    if (confirm('Delete from the list?')) {
+        var index = this.tasks.indexOf(task);
     axios.delete('/item/'+task.ID)
     .then(response =>{})
     .catch(e=>{
         this.errors.push(e)
         })
     this.tasks.splice(index, 1);
+    } else {
 
+    }
+    
 }
 
 

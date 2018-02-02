@@ -1,5 +1,12 @@
 .jumbotron {
-    color: maroon;
-    background-color: goldenrod;
+    color: goldenrod;
+    background-color: rgb(128, 0, 0);
     text-align: center;
+}
+
+thead {
+
+    background-color: rgb(80, 80, 80);
+    color: aliceblue;
+
 }
