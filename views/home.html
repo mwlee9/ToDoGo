@@ -16,7 +16,16 @@
 <body>
 
     <div class="jumbotron">
-        <h1 class="display-3">Todo List</h1>
+        <h1 class="display-3">Dashboard</h1>
+        <br>
+        <br>
+        <button type="button" class="btn btn-secondary">Work List</button>
+        <button type="button" class="btn">Weekend List</button>
+        <button type="button" class="btn btn-success">Grocery List</button>
+        <button type="button" class="btn btn-info">Resolutions</button>
+        <button type="button" class="btn btn-warning">Hobby List</button>
+        <button type="button" class="btn btn-danger">Design Wishlist</button>
+
     </div>
 
     <div class="container">
@@ -41,8 +50,6 @@
                         <option value=1>1</option>
                         <option value=2>2</option>
                         <option value=3>3</option>
-                        <option value=4>4</option>
-                        <option value=5>5</option>
                     </select>
 
                     <br>
@@ -63,14 +70,42 @@
                             <th>Priority</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row">
-                            <td style="display:none">[[task.ID]]</td>
-                            <td>[[task.Name]]</td>
-                            <td>[[task.Body]]</td>
-                            <td>[[task.Priority]]</td>
+
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority ===1"
+                        id = "highPriority">
+                        
+                                <td style="display:none">[[task.ID]]</td>
+
+                                <td>[[task.Name]]</td>
+                                <td>[[task.Body]]</td>
+                                <td>[[task.Priority]]</td>
+                                
                         </tr>
+
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 2" id = "medPriority">
+                        
+                                <td style="display:none">[[task.ID]]</td>
+
+                                <td>[[task.Name]]</td>
+                                <td>[[task.Body]]</td>
+                                <td>[[task.Priority]]</td>
+                                
+                        </tr>
+
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 3" id = "lowPriority">
+                        
+                                <td style="display:none">[[task.ID]]</td>
+
+                                <td>[[task.Name]]</td>
+                                <td>[[task.Body]]</td>
+                                <td>[[task.Priority]]</td>
+                                
+                        </tr>
+
                     </tbody>
+
                 </table>
                 <br>
                 <br>
