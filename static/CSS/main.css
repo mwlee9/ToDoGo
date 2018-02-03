@@ -25,3 +25,21 @@ thead {
     background-color: rgba(128, 0, 0, 0.85);
 }
 
+/*Footer Styling*/
+footer {
+    background-color: #4F5C5F;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 5px;
+  
+  }
+  
+  .footer p {
+      color: #C3C3C3;
+      font-size: 13px;
+  }
+  
+  .footer a {
+      color: white;
+  }
+
