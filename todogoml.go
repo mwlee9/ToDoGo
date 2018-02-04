@@ -35,8 +35,8 @@ func main() {
 	// Web Pages
 	router.GET("/work", handlers.Work)
 	router.GET("/weekend", handlers.Weekend)
-	// router.GET("/groceries", handlers.Weekend)
-	// router.GET("/resolutions", handlers.Weekend)
+	router.GET("/groceries", handlers.Groceries)
+	router.GET("/resolutions", handlers.Resolutions)
 	// router.GET("/hobby", handlers.Weekend)
 	// router.GET("/design", handlers.Weekend)
 

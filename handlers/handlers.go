@@ -67,29 +67,29 @@ func Weekend(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 }
 
-// Weekend ...
+// Grocery ...
 func Grocery(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	TblName = "weekend"
+	TblName = "grocery"
 
-	t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/grocery.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
 	checkErr(err)
 
-	t.Execute(w, "weekend")
+	t.Execute(w, "grocery")
 
 }
 
-// Weekend ...
+// Resolutions ...
 func Resolutions(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	TblName = "weekend"
+	TblName = "resolutions"
 
-	t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/resolutions.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
 	checkErr(err)
 
-	t.Execute(w, "weekend")
+	t.Execute(w, "resolutions")
 
 }
 
