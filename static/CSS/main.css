@@ -25,25 +25,25 @@
 
 #groceryJumbo {
     color: aliceblue;
-    background-color: lightgreen;
+    background-color: #5cb85c;
     text-align: center;
 }
 
 #resolutionJumbo {
     color: aliceblue;
-    background-color: lightblue;
+    background-color: #42b6ca;
     text-align: center;
 }
 
 #hobbyJumbo {
-    color: aliceblue;
-    background-color: gold;
+    color: black;
+    background-color: rgba(240, 204, 0, 0.959);
     text-align: center;
 }
 
 #designJumbo {
     color: aliceblue;
-    background-color: salmon;
+    background-color: #ca3e39;
     text-align: center;
 }
 /* ################################################################# */
