@@ -67,16 +67,16 @@ func Weekend(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 }
 
-// Grocery ...
-func Grocery(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+// Groceries ...
+func Groceries(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	TblName = "grocery"
+	TblName = "groceries"
 
-	t, err := template.ParseFiles("views/grocery.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/groceries.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
 	checkErr(err)
 
-	t.Execute(w, "grocery")
+	t.Execute(w, "groceries")
 
 }
 
@@ -90,6 +90,32 @@ func Resolutions(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	checkErr(err)
 
 	t.Execute(w, "resolutions")
+
+}
+
+// Hobby ...
+func Hobby(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "hobby"
+
+	t, err := template.ParseFiles("views/hobby.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "hobby")
+
+}
+
+// Design ...
+func Design(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "design"
+
+	t, err := template.ParseFiles("views/design.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "design")
 
 }
 

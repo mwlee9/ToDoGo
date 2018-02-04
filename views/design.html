@@ -1,0 +1,114 @@
+{{define "design"}} {{end}}
+
+<!DOCTYPE html>
+
+<head>
+  
+{{template "head" .}}
+
+</head>
+
+<body>
+
+    <div id ="dashJumbo" class="jumbotron">
+        <h1 class="display-3">Design List</h1>
+    </div>
+
+    <div class="container">
+        <div id="vueApp1">
+            <div>
+
+                <form action="/" method="post">
+
+                    
+                    <!-- Note only the frontend name was changed here! -->
+                    <p>Task</p>
+                    <input type="text" class="form-control" name="task">
+                    <br>
+
+                    <!-- Note that only the frontend name was changed here! -->
+                    <p>Category</p> 
+                    <input type="text" class="form-control" name="category">
+                    <br>
+
+                    <p>Priority</p>
+                    <select name="priority">
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                    </select>
+
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                </form>
+
+                <br>
+
+                <table class="table table-bordered">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th style="display: none">ID</th>
+                            <th>Category</th>
+                            <th>Task</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority ===1"
+                        id = "highPriority">
+                        
+                                <td style="display:none">[[task.ID]]</td>
+
+                                <td>[[task.Name]]</td>
+                                <td>[[task.Body]]</td>
+                                <td>[[task.Priority]]</td>
+                                
+                        </tr>
+
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 2" id = "medPriority">
+                        
+                                <td style="display:none">[[task.ID]]</td>
+
+                                <td>[[task.Name]]</td>
+                                <td>[[task.Body]]</td>
+                                <td>[[task.Priority]]</td>
+                                
+                        </tr>
+
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 3" id = "lowPriority">
+                        
+                                <td style="display:none">[[task.ID]]</td>
+
+                                <td>[[task.Name]]</td>
+                                <td>[[task.Body]]</td>
+                                <td>[[task.Priority]]</td>
+                                
+                        </tr>
+
+                    </tbody>
+
+                </table>
+                <br>
+                <br>
+
+            </div>
+        </div>
+    </div>
+   
+    <footer class="footer">
+
+        {{template "footer" .}}
+
+    </footer>
+
+</body>
+
+{{template "foot" .}}
+
+
+</html>

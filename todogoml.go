@@ -37,8 +37,8 @@ func main() {
 	router.GET("/weekend", handlers.Weekend)
 	router.GET("/groceries", handlers.Groceries)
 	router.GET("/resolutions", handlers.Resolutions)
-	// router.GET("/hobby", handlers.Weekend)
-	// router.GET("/design", handlers.Weekend)
+	router.GET("/hobby", handlers.Hobby)
+	router.GET("/design", handlers.Design)
 
 	http.ListenAndServe(getPort(), router)
 }
