@@ -22,22 +22,82 @@ type task struct {
 
 var tasks []task
 
-// Home ...
-func Home(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+// TblName ...
+// Allows data passage between functions for determine which table a webpage is on
+var TblName string
 
-	t, err3 := template.ParseFiles("views/home.html")
+// ##################################Render Pages##############################################
 
-	if err3 != nil {
-		fmt.Println("ERROR3")
-	}
+// Dash ...
+func Dash(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	t.Execute(w, "Home")
+	TblName = "dash"
+
+	t, err := template.ParseFiles("views/dash.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "dash")
 
 }
 
+// Work ...
+func Work(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "work"
+
+	t, err := template.ParseFiles("views/work.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "work")
+
+}
+
+// Weekend ...
+func Weekend(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "weekend"
+
+	t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "weekend")
+
+}
+
+// Weekend ...
+func Grocery(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "weekend"
+
+	t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "weekend")
+
+}
+
+// Weekend ...
+func Resolutions(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "weekend"
+
+	t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "weekend")
+
+}
+
+// ###########################################################################################
+
 // GetAllTasks ...
 func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows := models.GetAllTasks()
+	rows := models.GetAllTasks(TblName)
 	tasks := tasks[:0]
 
 	for rows.Next() {
@@ -56,11 +116,12 @@ func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 // GetOneTask ...
+//This GetOneTask func is needed in order to properly select a rec to delete!
 func GetOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	params := ps.ByName("id")
 
-	rows := models.GetOneTask(params)
+	rows := models.GetOneTask(params, TblName)
 
 	tempTask := task{}
 
@@ -84,7 +145,7 @@ func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	deletedRecord := ps.ByName("id")
 
 	// Query for the rows that are going to be deleted, to display before deletion.
-	rows := models.GetOneTask(deletedRecord)
+	rows := models.GetOneTask(deletedRecord, TblName)
 
 	tempTask := task{}
 
@@ -98,7 +159,7 @@ func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	json.NewEncoder(w).Encode(tempTask)
 
 	// Actually delete the record
-	models.DeleteOneTask(deletedRecord)
+	models.DeleteOneTask(deletedRecord, TblName)
 
 }
 
@@ -106,17 +167,20 @@ func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 func NewTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	r.ParseForm()
-	name := r.FormValue("name")
-	body := r.FormValue("body")
+	category := r.FormValue("category")
+	task := r.FormValue("task")
 	priority := r.FormValue("priority")
 
-	models.NewTask(name, body, priority)
+	// returns the route name (also named to the table name for convenience)
+	tblName := models.NewTask(category, task, priority, TblName)
 
-	t, err3 := template.ParseFiles("views/home.html")
+	viewFp := "views/" + tblName + ".html"
+	t, err := template.ParseFiles(viewFp, "partials/head.html", "partials/foot.html", "partials/footer.html")
 
-	checkErr(err3)
+	checkErr(err)
 
-	t.Execute(w, "Home")
+	// Remember, for partials each html file must be named properly.
+	t.Execute(w, tblName)
 
 }
 

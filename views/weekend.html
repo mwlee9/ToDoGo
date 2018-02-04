@@ -1,22 +1,17 @@
+{{define "weekend"}} {{end}}
+
 <!DOCTYPE html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- stylesheet order matters!!!! -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/CSS/main.css">
-
+  
+{{template "head" .}}
 
 </head>
 
 <body>
 
-    <div class="jumbotron">
-        <h1 class="display-3">Dashboard</h1>
+    <div id ="dashJumbo" class="jumbotron">
+        <h1 class="display-3">Weekend List</h1>
     </div>
 
     <div class="container">
@@ -25,15 +20,15 @@
 
                 <form action="/" method="post">
 
-                    <br>
+                    
                     <!-- Note only the frontend name was changed here! -->
                     <p>Task</p>
-                    <input type="text" class="form-control" name="body">
+                    <input type="text" class="form-control" name="task">
                     <br>
 
                     <!-- Note that only the frontend name was changed here! -->
                     <p>Category</p> 
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" name="category">
                     <br>
 
                     <p>Priority</p>
@@ -106,53 +101,14 @@
     </div>
    
     <footer class="footer">
-        
-        <div class = "container">
-            <div class = "row">
 
-                <div class = "col-md-4">
-                    <button type="button" class="btn btn-secondary btn-block">Work List</button>
-                </div>
-
-                <div class = "col-md-4">
-                    <button type="button" class="btn btn-block">Weekend List</button>
-                </div>
-                
-                <div class = "col-md-4">
-                    <button type="button" class="btn btn-success btn-block">Grocery List</button>
-                </div>
-
-            </div>
-            
-            <div class = "row">
-
-                <div class = "col-md-4">
-                    <button type="button" class="btn btn-info btn-block">Resolutions</button>
-                </div>
-
-                <div class = "col-md-4">
-                    <button type="button" class="btn btn-warning btn-block">Hobby List</button>
-                </div>
-
-                <div class = "col-md-4">
-                    <button type="button" class="btn btn-danger btn-block" style="">Design Wishlist</button>
-                </div>
-                
-               
-
-            </div>
-            <p style="text-align: center;">Built by Mathew Lee using Golang, VueJS and Postgres.</p>
-
-        </div>
+        {{template "footer" .}}
 
     </footer>
-    
 
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
-<script src="../static/Javascript/vue.js"></script>
-<script src="../static/Javascript/vueapp.js"></script>
-<!-- <script src="../static/Javascript/test.js"></script> -->
+{{template "foot" .}}
+
 
 </html>

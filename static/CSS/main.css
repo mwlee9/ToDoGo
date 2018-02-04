@@ -1,16 +1,54 @@
-.jumbotron {
+/* Jumbotron stylings */
+/* .jumbotron {
     color: goldenrod;
     background-color: rgb(128, 0, 0);
     text-align: center;
+} */
+
+#dashJumbo {
+    color: rgb(163, 60, 60);
+    background-color: wheat;
+    text-align: center;
 }
 
-thead {
-
-    background-color: rgb(80, 80, 80);
+#workJumbo {
     color: aliceblue;
-
+    background-color: gray;
+    text-align: center;
 }
 
+#weekendJumbo {
+    color: aliceblue;
+    background-color: black;
+    text-align: center;
+}
+
+#groceryJumbo {
+    color: aliceblue;
+    background-color: lightgreen;
+    text-align: center;
+}
+
+#resolutionJumbo {
+    color: aliceblue;
+    background-color: lightblue;
+    text-align: center;
+}
+
+#hobbyJumbo {
+    color: aliceblue;
+    background-color: gold;
+    text-align: center;
+}
+
+#designJumbo {
+    color: aliceblue;
+    background-color: salmon;
+    text-align: center;
+}
+/* ################################################################# */
+
+/* List Stylings */
 #lowPriority {
     background-color:rgba(255, 217, 0, 0.85);
 }
@@ -43,3 +81,13 @@ footer {
       color: white;
   }
 
+
+/* ################################################################# */
+/* Other */
+
+thead {
+
+    background-color: rgb(80, 80, 80);
+    color: aliceblue;
+
+}
