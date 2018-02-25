@@ -9,6 +9,8 @@ import (
 	"github.com/mwlee9/todogoml/models"
 
 	"github.com/julienschmidt/httprouter"
+
+	"github.com/microcosm-cc/bluemonday"
 )
 
 // Types - Remember, names must be capital to be exported for the json package to use.
@@ -193,9 +195,14 @@ func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 func NewTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	r.ParseForm()
-	category := r.FormValue("category")
-	task := r.FormValue("task")
-	priority := r.FormValue("priority")
+	categoryIn := r.FormValue("category")
+	taskIn := r.FormValue("task")
+	priorityIn := r.FormValue("priority")
+
+	p := bluemonday.UGCPolicy()
+	category := p.Sanitize(categoryIn)
+	task := p.Sanitize(taskIn)
+	priority := p.Sanitize(priorityIn)
 
 	// returns the route name (also named to the table name for convenience)
 	tblName := models.NewTask(category, task, priority, TblName)
@@ -219,9 +226,14 @@ func EditOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err := r.ParseForm()
 	checkErr(err)
 
-	category := r.FormValue("taskBody")
-	task := r.FormValue("taskCategory")
-	priority := r.FormValue("taskPriority")
+	categoryIn := r.FormValue("taskBody")
+	taskIn := r.FormValue("taskCategory")
+	priorityIn := r.FormValue("taskPriority")
+
+	p := bluemonday.UGCPolicy()
+	category := p.Sanitize(categoryIn)
+	task := p.Sanitize(taskIn)
+	priority := p.Sanitize(priorityIn)
 
 	// Actually edit the record
 	models.EditOneTask(category, task, priority, TblName, editedRecordId)
