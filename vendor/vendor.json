@@ -19,6 +19,24 @@
 			"path": "github.com/lib/pq/oid",
 			"revision": "19c8e9ad00952ce0c64489b60e8df88bb16dd514",
 			"revisionTime": "2018-01-19T15:11:48Z"
+		},
+		{
+			"checksumSHA1": "c9xiEsGSu+tszHGBmQcFi11wzFk=",
+			"path": "github.com/microcosm-cc/bluemonday",
+			"revision": "542fd4642604d0d0c26112396ce5b1a9d01eee0b",
+			"revisionTime": "2017-12-22T15:26:07Z"
+		},
+		{
+			"checksumSHA1": "L68uqaYKEOxkq2xwnNV2bRP7yO4=",
+			"path": "golang.org/x/net/html",
+			"revision": "cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb",
+			"revisionTime": "2018-02-18T17:15:52Z"
+		},
+		{
+			"checksumSHA1": "RLqClvtTLYRcgfKnfLcCnHNvv2Y=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb",
+			"revisionTime": "2018-02-18T17:15:52Z"
 		}
 	],
 	"rootPath": "github.com/mwlee9/todogoml"
