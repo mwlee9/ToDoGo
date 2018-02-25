@@ -95,3 +95,8 @@ thead {
 .editActive {
     background-color: rgb(163, 35, 255);
 }
+
+#editButton {
+    color: aliceblue;
+    background-color: rgb(163, 35, 255);
+}
