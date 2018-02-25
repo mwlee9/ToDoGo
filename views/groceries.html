@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 
 <head>
-  
-{{template "head" .}}
+
+    {{template "head" .}}
 
 </head>
 
 <body>
 
-    <div id ="groceryJumbo" class="jumbotron">
+    <div id="groceryJumbo" class="jumbotron">
         <h1 class="display-3">Grocery List</h1>
     </div>
 
@@ -20,14 +20,14 @@
 
                 <form action="/" method="post">
 
-                    
+
                     <!-- Note only the frontend name was changed here! -->
                     <p>Task</p>
                     <input type="text" class="form-control" name="task">
                     <br>
 
                     <!-- Note that only the frontend name was changed here! -->
-                    <p>Category</p> 
+                    <p>Category</p>
                     <input type="text" class="form-control" name="category">
                     <br>
 
@@ -41,9 +41,10 @@
                     <br>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
-
+                    <a class="btn secondary" @click="edit()">Edit</a>
 
                 </form>
+
 
                 <br>
 
@@ -51,6 +52,7 @@
                     <thead class="thead-inverse">
                         <tr>
                             <th style="display: none">ID</th>
+                            <th>Delete?</th>
                             <th>Category</th>
                             <th>Task</th>
                             <th>Priority</th>
@@ -59,35 +61,37 @@
 
                     <tbody>
 
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority ===1"
-                        id = "highPriority">
-                        
-                                <td style="display:none">[[task.ID]]</td>
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority ===1" id="highPriority">
 
-                                <td>[[task.Name]]</td>
-                                <td>[[task.Body]]</td>
-                                <td>[[task.Priority]]</td>
-                                
+                            <td style="display:none">[[task.ID]]</td>
+                            <td @click="sub(task)">X</td>
+                            <td>[[task.Name]]</td>
+                            <td>[[task.Body]]</td>
+                            <td>[[task.Priority]]</td>
+
                         </tr>
 
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 2" id = "medPriority">
-                        
-                                <td style="display:none">[[task.ID]]</td>
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 2" id="medPriority">
 
-                                <td>[[task.Name]]</td>
-                                <td>[[task.Body]]</td>
-                                <td>[[task.Priority]]</td>
-                                
+                            <td style="display:none">[[task.ID]]</td>
+                            <td @click="sub(task)">X</td>
+                            <td>[[task.Name]]</td>
+                            <td>[[task.Body]]</td>
+                            <td>[[task.Priority]]</td>
+
                         </tr>
 
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 3" id = "lowPriority">
-                        
-                                <td style="display:none">[[task.ID]]</td>
+                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if="task.Priority === 3" id="lowPriority">
 
-                                <td>[[task.Name]]</td>
-                                <td>[[task.Body]]</td>
-                                <td>[[task.Priority]]</td>
-                                
+                            <td style="display:none">[[task.ID]]</td>
+
+                            <td style="display:none">[[task.ID]]</td>
+                            <td @click="sub(task)">X</td>
+                            <td>[[task.Name]]</td>
+                            <td>[[task.Body]]</td>
+                            <td>[[task.Priority]]</td>
+
+
                         </tr>
 
                     </tbody>
@@ -99,7 +103,8 @@
             </div>
         </div>
     </div>
-   
+
+
     <footer class="footer">
 
         {{template "footer" .}}
