@@ -61,7 +61,7 @@
 
                     <tbody>
 
-                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority ===1" id="highPriority">
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority ===1" class="highPriority" v-bind:class="{editActive: currTask === task}">
 
                             <td style="display:none">[[task.ID]]</td>
                             <td @click="sub(task)">X</td>
@@ -71,7 +71,7 @@
 
                         </tr>
 
-                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 2" id="medPriority">
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 2" class="medPriority" v-bind:class="{editActive: currTask === task}">
 
                             <td style="display:none">[[task.ID]]</td>
                             <td @click="sub(task)">X</td>
@@ -81,7 +81,7 @@
 
                         </tr>
 
-                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 3" id="lowPriority">
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 3" class="lowPriority" v-bind:class="{editActive: currTask === task}">
 
                             <td style="display:none">[[task.ID]]</td>
 

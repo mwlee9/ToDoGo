@@ -33,7 +33,8 @@ function populateTf(taskPayload) {
     this.taskCategory = taskPayload.Name;
     this.taskPriority = taskPayload.Priority;
     this.taskID = taskPayload.ID;
-    
+    this.editIsActive = "editActive";
+    this.currTask = taskPayload;
 }
 
 function edit() {
@@ -59,6 +60,8 @@ function edit() {
     
     history.replaceState(null,document.title, location.href);
     GetAllTasks(v1);
+    this.taskID = 0;
+    this.editIsActive = "";
     location.reload();
 }
 
@@ -70,8 +73,9 @@ var v1 = new Vue({
         task: '',
         taskBody: '',
         taskCategory: '',
-        taskPriority: 0,
-        taskID: 0
+        taskPriority: 1,
+        taskID: null,
+        currTask: null
     },
     methods: {
         sub: sub,

@@ -49,16 +49,16 @@
 /* ################################################################# */
 
 /* List Stylings */
-#lowPriority {
+.lowPriority {
     background-color:rgba(255, 217, 0, 0.85);
 }
 
-#medPriority {
+.medPriority {
     color:aliceblue; 
     background-color:rgba(255, 68, 0, 0.85);
 }
 
-#highPriority {
+.highPriority {
     color:aliceblue;
     background-color: rgba(128, 0, 0, 0.85);
 }
@@ -90,4 +90,8 @@ thead {
     background-color: rgb(80, 80, 80);
     color: aliceblue;
 
+}
+
+.editActive {
+    background-color: rgb(163, 35, 255);
 }

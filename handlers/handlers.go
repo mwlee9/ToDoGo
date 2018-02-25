@@ -226,8 +226,8 @@ func EditOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err := r.ParseForm()
 	checkErr(err)
 
-	categoryIn := r.FormValue("taskBody")
-	taskIn := r.FormValue("taskCategory")
+	taskIn := r.FormValue("taskBody")
+	categoryIn := r.FormValue("taskCategory")
 	priorityIn := r.FormValue("taskPriority")
 
 	p := bluemonday.UGCPolicy()
