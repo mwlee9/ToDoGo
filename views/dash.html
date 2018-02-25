@@ -41,9 +41,10 @@
                     <br>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
-
+                    <a class="btn secondary" @click = "edit()">Edit</a>
 
                 </form>
+                
 
                 <br>
 
@@ -51,6 +52,7 @@
                     <thead class="thead-inverse">
                         <tr>
                             <th style="display: none">ID</th>
+                            <th>Delete?</th>
                             <th>Category</th>
                             <th>Task</th>
                             <th>Priority</th>
@@ -59,21 +61,21 @@
 
                     <tbody>
 
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority ===1"
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if = "task.Priority ===1"
                         id = "highPriority">
                         
                                 <td style="display:none">[[task.ID]]</td>
-
+                                <td class = "deleteColumn" @click = "sub(task)">X</td>
                                 <td>[[task.Name]]</td>
                                 <td>[[task.Body]]</td>
                                 <td>[[task.Priority]]</td>
                                 
                         </tr>
 
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if = "task.Priority === 2" id = "medPriority">
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if = "task.Priority === 2" id = "medPriority">
                         
                                 <td style="display:none">[[task.ID]]</td>
-
+                                <td class = "deleteColumn" @click = "sub(task)">X</td>
                                 <td>[[task.Name]]</td>
                                 <td>[[task.Body]]</td>
                                 <td>[[task.Priority]]</td>

@@ -32,6 +32,8 @@ func main() {
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
 	// REMEMBER: Chrome caches the stylesheet when it can't be found...use firefox instead, or delete history in chrome.
 
+	router.PUT("/item/:id", handlers.EditOneTask)
+
 	// Web Pages
 	router.GET("/work", handlers.Work)
 	router.GET("/weekend", handlers.Weekend)

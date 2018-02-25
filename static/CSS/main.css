@@ -6,8 +6,8 @@
 } */
 
 #dashJumbo {
-    color: rgb(163, 60, 60);
-    background-color: wheat;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     text-align: center;
 }
 
@@ -90,4 +90,10 @@ thead {
     background-color: rgb(80, 80, 80);
     color: aliceblue;
 
+}
+
+.deleteColumn {
+    width:1px;
+    white-space:nowrap;
+    text-align: center;
 }

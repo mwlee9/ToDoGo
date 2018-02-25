@@ -168,10 +168,10 @@ func GetOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	// Get the id of the record to be deleted.
-	deletedRecord := ps.ByName("id")
+	deletedRecordId := ps.ByName("id")
 
 	// Query for the rows that are going to be deleted, to display before deletion.
-	rows := models.GetOneTask(deletedRecord, TblName)
+	rows := models.GetOneTask(deletedRecordId, TblName)
 
 	tempTask := task{}
 
@@ -185,7 +185,7 @@ func DeleteOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	json.NewEncoder(w).Encode(tempTask)
 
 	// Actually delete the record
-	models.DeleteOneTask(deletedRecord, TblName)
+	models.DeleteOneTask(deletedRecordId, TblName)
 
 }
 
@@ -207,6 +207,25 @@ func NewTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	// Remember, for partials each html file must be named properly.
 	t.Execute(w, tblName)
+
+}
+
+// EditOneTask ...
+func EditOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
+	// Get the id of the record to be edited.
+	editedRecordId := ps.ByName("id")
+	fmt.Println(editedRecordId)
+
+	err := r.ParseForm()
+	checkErr(err)
+
+	category := r.FormValue("taskBody")
+	task := r.FormValue("taskCategory")
+	priority := r.FormValue("taskPriority")
+
+	// Actually edit the record
+	models.EditOneTask(category, task, priority, TblName, editedRecordId)
 
 }
 

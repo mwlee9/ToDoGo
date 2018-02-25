@@ -151,6 +151,45 @@ func DeleteOneTask(param string, tblName string) sql.Result {
 
 }
 
+// EditOneTask ...
+func EditOneTask(category string, task string, priority string, tblName string, param string) string {
+
+	db := InitDatabase()
+
+	var stmt *sql.Stmt
+	var err error
+
+	switch tblName {
+
+	case "dash":
+		stmt, err = db.Prepare("UPDATE dash set category = $1, task = $2, priority = $3 WHERE id = $4")
+	case "work":
+		stmt, err = db.Prepare("UPDATE work set category = $1, task = $2, priority = $3 WHERE id = $4")
+	case "weekend":
+		stmt, err = db.Prepare("UPDATE weekend set category = $1, task = $2, priority = $3 WHERE id = $4")
+	case "groceries":
+		stmt, err = db.Prepare("UPDATE groceries set category = $1, task = $2, priority = $3 WHERE id = $4")
+	case "resolutions":
+		stmt, err = db.Prepare("UPDATE resolutions set category = $1, task = $2, priority = $3 WHERE id = $4")
+	case "hobby":
+		stmt, err = db.Prepare("UPDATE hobby set category = $1, task = $2, priority = $3 WHERE id = $4")
+	case "design":
+		stmt, err = db.Prepare("UPDATE design set category = $1, task = $2, priority = $3 WHERE id = $4")
+
+	}
+
+	checkErr(err)
+
+	_, err = stmt.Exec(category, task, priority, param)
+
+	checkErr(err)
+
+	defer db.Close()
+
+	return tblName
+
+}
+
 // NewTask ...
 func NewTask(category string, task string, priority string, tblName string) string {
 

@@ -1,3 +1,5 @@
+var params = new URLSearchParams();
+
 function GetAllTasks(inst) {
     axios.get('/all')
         .then(function (response) {
@@ -24,6 +26,40 @@ function sub(task) {
     
 }
 
+function populateTf(taskPayload) {
+
+    document.getElementsByName("task")[0].value = taskPayload.Body;
+    document.getElementsByName("category")[0].value = taskPayload.Name;
+    document.getElementsByName("priority")[0].value = taskPayload.Priority;
+    this.taskID = taskPayload.ID;
+    
+}
+
+function edit() {
+  
+    // Have to stringify this to make sure data is sent over in the x-www-form-urlencoded format. Note this method may not work with all browsers, see google. 
+    
+    params.delete('taskBody', taskBody);
+    params.delete('taskCategory', taskCategory);
+    params.delete('taskPriority', taskPriority);
+   
+    var taskBody = document.getElementsByName("task")[0].value;
+    var taskCategory = document.getElementsByName("category")[0].value ;
+    var taskPriority = document.getElementsByName("priority")[0].value;
+        
+    params.append('taskBody', taskBody);
+    params.append('taskCategory', taskCategory);
+    params.append('taskPriority', taskPriority);
+
+    axios.put('/item/'+this.taskID, params)
+    .then(response =>{})
+    .catch(e=>{
+        this.errors.push(e)
+        })
+
+    location.reload();
+    
+}
 
 var v1 = new Vue({
     delimiters: ['[[', ']]'],
@@ -31,11 +67,15 @@ var v1 = new Vue({
     data: {
         tasks: [],
         task: '',
+        taskID: 0
     },
     methods: {
-        sub: sub
+        sub: sub,
+        edit: edit,
+        populateTf: populateTf,
     }
 
 })
+
 
 GetAllTasks(v1)
