@@ -28,9 +28,9 @@ function sub(task) {
 
 function populateTf(taskPayload) {
 
-    document.getElementsByName("task")[0].value = taskPayload.Body;
-    document.getElementsByName("category")[0].value = taskPayload.Name;
-    document.getElementsByName("priority")[0].value = taskPayload.Priority;
+    this.taskBody = taskPayload.Body;
+    this.taskCategory = taskPayload.Name;
+    this.taskPriority = taskPayload.Priority;
     this.taskID = taskPayload.ID;
     
 }
@@ -38,7 +38,6 @@ function populateTf(taskPayload) {
 function edit() {
   
     // Have to stringify this to make sure data is sent over in the x-www-form-urlencoded format. Note this method may not work with all browsers, see google. 
-    
     params.delete('taskBody', taskBody);
     params.delete('taskCategory', taskCategory);
     params.delete('taskPriority', taskPriority);
@@ -56,9 +55,9 @@ function edit() {
     .catch(e=>{
         this.errors.push(e)
         })
-
-    location.reload();
     
+    GetAllTasks(v1);
+    location.reload();
 }
 
 var v1 = new Vue({
@@ -67,6 +66,9 @@ var v1 = new Vue({
     data: {
         tasks: [],
         task: '',
+        taskBody: '',
+        taskCategory: '',
+        taskPriority: 0,
         taskID: 0
     },
     methods: {

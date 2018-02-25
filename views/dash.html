@@ -23,16 +23,16 @@
 
                     <!-- Note only the frontend name was changed here! -->
                     <p>Task</p>
-                    <input type="text" class="form-control" name="task">
+                    <input type="text" class="form-control" name="task" v-model = "taskBody">
                     <br>
 
                     <!-- Note that only the frontend name was changed here! -->
                     <p>Category</p>
-                    <input type="text" class="form-control" name="category">
+                    <input type="text" class="form-control" name="category" v-model = "taskCategory">
                     <br>
 
                     <p>Priority</p>
-                    <select name="priority">
+                    <select name="priority" v-model = "taskPriority">
                         <option value=1>1</option>
                         <option value=2>2</option>
                         <option value=3>3</option>
@@ -52,7 +52,7 @@
                     <thead class="thead-inverse">
                         <tr>
                             <th style="display: none">ID</th>
-                            <th>Delete?</th>
+                            <th></th>
                             <th>Category</th>
                             <th>Task</th>
                             <th>Priority</th>
@@ -81,7 +81,7 @@
 
                         </tr>
 
-                        <tr v-for="task in tasks" @click="sub(task)" scope="row" v-if="task.Priority === 3" id="lowPriority">
+                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 3" id="lowPriority">
 
                             <td style="display:none">[[task.ID]]</td>
 
