@@ -215,7 +215,6 @@ func EditOneTask(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	// Get the id of the record to be edited.
 	editedRecordId := ps.ByName("id")
-	fmt.Println(editedRecordId)
 
 	err := r.ParseForm()
 	checkErr(err)

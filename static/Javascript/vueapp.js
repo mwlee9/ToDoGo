@@ -1,4 +1,5 @@
 var params = new URLSearchParams();
+history.replaceState(null,document.title, location.href);
 
 function GetAllTasks(inst) {
     axios.get('/all')
@@ -56,6 +57,7 @@ function edit() {
         this.errors.push(e)
         })
     
+    history.replaceState(null,document.title, location.href);
     GetAllTasks(v1);
     location.reload();
 }
