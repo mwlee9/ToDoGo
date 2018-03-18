@@ -12,9 +12,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func favicon(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	http.ServeFile(w, r, "static/img/golang_gopher.ico")
-}
+// func favicon(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+// 	http.ServeFile(w, r, "static/img/golang_gopher.ico")
+// }
 
 // Server
 func main() {
@@ -32,7 +32,7 @@ func main() {
 	router.DELETE("/item/:id", handlers.DeleteOneTask)
 	router.POST("/", handlers.NewTask)
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
-	router.GET("/favicon.ico", favicon)
+	// router.GET("/favicon.ico", favicon)
 
 	// REMEMBER: Chrome caches the stylesheet when it can't be found...use firefox instead, or delete history in chrome.
 
