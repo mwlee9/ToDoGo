@@ -28,7 +28,13 @@ var tasks []task
 // Allows data passage between functions for determine which table a webpage is on
 var TblName string
 
-// ##################################Render Pages##############################################
+// #################################################Serve Favicon#####################
+
+func FaviconHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "golang_gopher.ico")
+}
+
+// #################################################Render Pages#####################
 
 // Dash ...
 func Dash(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {

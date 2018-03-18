@@ -26,10 +26,11 @@
                     <input type="text" class="form-control" name="task" v-model = "taskBody">
                     <br>
 
-                    <!-- Note that only the frontend name was changed here! -->
                     <p>Category</p>
-                    <input type="text" class="form-control" name="category" v-model = "taskCategory">
-                    <br>
+                    <select name="category" v-model = "taskCategory">
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
 
                     <p>Priority</p>
                     <select name="priority" v-model = "taskPriority">

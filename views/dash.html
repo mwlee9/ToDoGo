@@ -5,6 +5,17 @@
 <head>
 
     {{template "head" .}}
+    <style>
+    img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    }
+    p {
+        text-align: center;
+    }
+    </style>
 
 </head>
 
@@ -14,94 +25,17 @@
         <h1 class="display-3">Dashboard</h1>
     </div>
 
-    <div class="container">
-        <div id="vueApp1">
-            <div>
-
-                <form action="/" method="post">
-
-
-                    <!-- Note only the frontend name was changed here! -->
-                    <p>Task</p>
-                    <input type="text" class="form-control" name="task" v-model = "taskBody">
-                    <br>
-
-                    <!-- Note that only the frontend name was changed here! -->
-                    <p>Category</p>
-                    <input type="text" class="form-control" name="category" v-model = "taskCategory">
-                    <br>
-
-                    <p>Priority</p>
-                    <select name="priority" v-model = "taskPriority">
-                        <option value=1>1</option>
-                        <option value=2>2</option>
-                        <option value=3>3</option>
-                    </select>
-
-                    <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a class="btn secondary" @click="edit()" id = "editButton">Edit</a>
-
-                </form>
-
-
-                <br>
-
-                <table class="table table-bordered">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th style="display: none">ID</th>
-                            <th></th>
-                            <th>Category</th>
-                            <th>Task</th>
-                            <th>Priority</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority ===1" class="highPriority" v-bind:class="{editActive: currTask === task}">
-
-                            <td style="display:none">[[task.ID]]</td>
-                            <td @click="sub(task)">X</td>
-                            <td>[[task.Name]]</td>
-                            <td>[[task.Body]]</td>
-                            <td>[[task.Priority]]</td>
-
-                        </tr>
-
-                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 2" class="medPriority" v-bind:class="{editActive: currTask === task}">
-
-                            <td style="display:none">[[task.ID]]</td>
-                            <td @click="sub(task)">X</td>
-                            <td>[[task.Name]]</td>
-                            <td>[[task.Body]]</td>
-                            <td>[[task.Priority]]</td>
-
-                        </tr>
-
-                        <tr v-for="task in tasks" @click="populateTf(task)" scope="row" v-if="task.Priority === 3" class="lowPriority" v-bind:class="{editActive: currTask === task}">
-
-                            <td style="display:none">[[task.ID]]</td>
-
-                            <td style="display:none">[[task.ID]]</td>
-                            <td @click="sub(task)">X</td>
-                            <td>[[task.Name]]</td>
-                            <td>[[task.Body]]</td>
-                            <td>[[task.Priority]]</td>
-
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-                <br>
-                <p>Total # of Tasks: [[tasks.length]]</p>
-
-            </div>
-        </div>
+    <div class = "container">
+        <h1 style="text-align: center;">Placeholder Puppies</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Mopshond2_03-10-2005.jpg" alt="">
+        <p>Courtesy of Wikimedia Creative Commons</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Kelsey_n_Penny_%28Welsh_Corgis%29.jpg" alt="">
+        <p>Courtesy of Wikimedia Creative Commons</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Queen_Elizabeth_Pocket_Beagle_puppy.jpg/680px-Queen_Elizabeth_Pocket_Beagle_puppy.jpg" alt="">
+        <p>Courtesy of Wikimedia Creative Commons</p>
+        <img src="https://blog.golang.org/gopher/header.jpg">
+        <p>Golang Gopher created by Renee French</p>
+    
     </div>
 
     <footer class="footer">

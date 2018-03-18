@@ -4,7 +4,6 @@ history.replaceState(null,document.title, location.href);
 function GetAllTasks(inst) {
     axios.get('/all')
         .then(function (response) {
-            console.log(response.data)
             inst.tasks = response.data;
         })
         .catch(function (error) {
