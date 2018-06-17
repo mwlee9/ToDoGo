@@ -3,11 +3,12 @@ package models
 import (
 	"database/sql"
 	"fmt"
+	"os"
 )
 
 // Database
 func InitDatabase() *sql.DB {
-	conn := "postgres://swyreijf:hlR3e6UqP7YEsy6nq_BIChyRE8SPINoP@nutty-custard-apple.db.elephantsql.com:5432/swyreijf"
+	conn := os.Getenv("DATABASE_URL_TODOGOML")
 	db, err := sql.Open("postgres", conn)
 
 	checkErr(err)

@@ -6,15 +6,16 @@
 
     {{template "head" .}}
     <style>
-    img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    }
-    p {
-        text-align: center;
-    }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+        p {
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -25,24 +26,41 @@
         <h1 class="display-3">Dashboard</h1>
     </div>
 
-    <div class = "container">
-        <h1 style="text-align: center;">Placeholder Puppies</h1>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Mopshond2_03-10-2005.jpg" alt="">
-        <p>Courtesy of Wikimedia Creative Commons</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Kelsey_n_Penny_%28Welsh_Corgis%29.jpg" alt="">
-        <p>Courtesy of Wikimedia Creative Commons</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Queen_Elizabeth_Pocket_Beagle_puppy.jpg/680px-Queen_Elizabeth_Pocket_Beagle_puppy.jpg" alt="">
-        <p>Courtesy of Wikimedia Creative Commons</p>
-        <img src="https://blog.golang.org/gopher/header.jpg">
-        <p>Golang Gopher created by Renee French</p>
-    
-    </div>
 
-    <footer class="footer">
+    <div class="container">
 
-        {{template "footer" .}}
+        <form action="/login" method="post">
 
-    </footer>
+            <p>Username</p>
+            <input type="text" class="form-control" name="username">
+            <br>
+
+            <p>Password</p>
+            <input type="password" class="form-control" name="password">
+            <br>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+
+        </form>
+        <br>
+        <br>
+        <br>
+
+        <!-- <div class="container">
+            <h1 style="text-align: center;">Placeholder</h1>
+            <img src="https://golang.org/doc/gopher/pencil/gopherswrench.jpg" alt="">
+            <img src="https://img.devrant.com/devrant/rant/r_557673_5ZQ9F.jpg" alt="">
+            <img src="https://files-warehouse.com/files/stickers/ff/ff8f/ff8f3d3d03c54faa1ff27ff3d55bc236.jpg" alt="">
+            <img src="https://blog.golang.org/gopher/header.jpg">
+            <p>Golang Gopher created by Renee French</p>
+
+        </div> -->
+
+        <footer class="footer">
+
+            {{template "footer" .}}
+
+        </footer>
 
 </body>
 

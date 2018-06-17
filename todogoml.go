@@ -25,12 +25,13 @@ func main() {
 
 	// Handlers
 	router := httprouter.New()
-	router.GET("/", handlers.Dash)
+
 	router.GET("/all", handlers.GetAllTasks)
 	router.GET("/item/:id/", handlers.GetOneTask) //REMEMBER: a req without an ID still routes to this URL, passing in "favicon.ico" as the param. can't be /:id, must be diff branch url/item/:id
 	//This GetOneTask func is needed in order to properly select a rec to delete!
 	router.DELETE("/item/:id", handlers.DeleteOneTask)
 	router.POST("/", handlers.NewTask)
+	router.POST("/login", handlers.Login)
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
 	// router.GET("/favicon.ico", favicon)
 
@@ -39,6 +40,7 @@ func main() {
 	router.PUT("/item/:id", handlers.EditOneTask)
 
 	// Web Pages
+	router.GET("/", handlers.Dash)
 	router.GET("/work", handlers.Work)
 	router.GET("/weekend", handlers.Weekend)
 	router.GET("/groceries", handlers.Groceries)
