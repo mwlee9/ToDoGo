@@ -31,7 +31,7 @@ func main() {
 	//This GetOneTask func is needed in order to properly select a rec to delete!
 	router.DELETE("/item/:id", handlers.DeleteOneTask)
 	router.POST("/", handlers.NewTask)
-	router.POST("/login", handlers.Login)
+	router.POST("/login", handlers.LoginForm)
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
 	// router.GET("/favicon.ico", favicon)
 
@@ -40,7 +40,8 @@ func main() {
 	router.PUT("/item/:id", handlers.EditOneTask)
 
 	// Web Pages
-	router.GET("/", handlers.Dash)
+	router.GET("/", handlers.Login)
+	router.GET("/dash", handlers.Dash)
 	router.GET("/work", handlers.Work)
 	router.GET("/weekend", handlers.Weekend)
 	router.GET("/groceries", handlers.Groceries)

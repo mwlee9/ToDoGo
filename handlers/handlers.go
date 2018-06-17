@@ -145,12 +145,15 @@ func Design(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 // ###########################################################################################
 
 // Login ...
-func Login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func LoginForm(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	AllowAccess = 0
-
-	username := ps.ByName("username")
-	password := ps.ByName("password")
+	r.ParseForm()
+	usernameIn := r.FormValue("username")
+	passwordIn := r.FormValue("password")
+	p := bluemonday.UGCPolicy()
+	username := p.Sanitize(usernameIn)
+	password := p.Sanitize(passwordIn)
 
 	if username == os.Getenv("TODOGOML_USERNAME") && password == os.Getenv("TODOGOML_PASSWORD") {
 		AllowAccess = 1
@@ -163,6 +166,19 @@ func Login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	checkErr(err)
 
 	t.Execute(w, "dash")
+
+}
+
+// Login ...
+func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	TblName = "dash"
+
+	t, err := template.ParseFiles("views/login.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+
+	checkErr(err)
+
+	t.Execute(w, "login")
 
 }
 
