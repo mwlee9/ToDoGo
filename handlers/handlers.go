@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os"
 
 	"github.com/mwlee9/todogoml/models"
 
@@ -29,13 +28,27 @@ var tasks []task
 // Allows data passage between functions for determine which table a webpage is on
 var TblName string
 
-// Allows access through basic verification on homepage
-var AllowAccess int
-
 // #################################################Serve Favicon#####################
 
 func FaviconHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "golang_gopher.ico")
+}
+
+// #############################Authetification Middleware#############################
+func BasicAuth(h httprouter.Handle, requiredUser, requiredPassword string) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		// Get the Basic Authentication credentials
+		user, password, hasAuth := r.BasicAuth()
+
+		if hasAuth && user == requiredUser && password == requiredPassword {
+			// Delegate request to the given handle
+			h(w, r, ps)
+		} else {
+			// Request Basic Authentication otherwise
+			w.Header().Set("WWW-Authenticate", "Basic realm=Restricted")
+			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+		}
+	}
 }
 
 // #################################################Render Pages#####################
@@ -56,46 +69,39 @@ func Dash(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 // Work ...
 func Work(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	if AllowAccess == 1 {
-		TblName = "work"
+	TblName = "work"
 
-		t, err := template.ParseFiles("views/work.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/work.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
-		checkErr(err)
+	checkErr(err)
 
-		t.Execute(w, "work")
-
-	}
+	t.Execute(w, "work")
 
 }
 
 // Weekend ...
 func Weekend(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	if AllowAccess == 1 {
-		TblName = "weekend"
+	TblName = "weekend"
 
-		t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/weekend.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
-		checkErr(err)
+	checkErr(err)
 
-		t.Execute(w, "weekend")
-	}
+	t.Execute(w, "weekend")
 
 }
 
 // Groceries ...
 func Groceries(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	if AllowAccess == 1 {
-		TblName = "groceries"
+	TblName = "groceries"
 
-		t, err := template.ParseFiles("views/groceries.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/groceries.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
-		checkErr(err)
+	checkErr(err)
 
-		t.Execute(w, "groceries")
-	}
+	t.Execute(w, "groceries")
 
 }
 
@@ -115,73 +121,30 @@ func Resolutions(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 // Hobby ...
 func Hobby(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	if AllowAccess == 1 {
-		TblName = "hobby"
+	TblName = "hobby"
 
-		t, err := template.ParseFiles("views/hobby.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/hobby.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
-		checkErr(err)
+	checkErr(err)
 
-		t.Execute(w, "hobby")
-	}
+	t.Execute(w, "hobby")
 
 }
 
 // Design ...
 func Design(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
-	if AllowAccess == 1 {
-		TblName = "design"
+	TblName = "design"
 
-		t, err := template.ParseFiles("views/design.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
+	t, err := template.ParseFiles("views/design.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
 
-		checkErr(err)
+	checkErr(err)
 
-		t.Execute(w, "design")
-	}
+	t.Execute(w, "design")
 
 }
 
 // ###########################################################################################
-
-// Login ...
-func LoginForm(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
-	AllowAccess = 0
-	r.ParseForm()
-	usernameIn := r.FormValue("username")
-	passwordIn := r.FormValue("password")
-	p := bluemonday.UGCPolicy()
-	username := p.Sanitize(usernameIn)
-	password := p.Sanitize(passwordIn)
-
-	if username == os.Getenv("TODOGOML_USERNAME") && password == os.Getenv("TODOGOML_PASSWORD") {
-		AllowAccess = 1
-	}
-
-	TblName = "dash"
-
-	t, err := template.ParseFiles("views/dash.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
-
-	checkErr(err)
-
-	t.Execute(w, "dash")
-
-}
-
-// Login ...
-func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-
-	TblName = "dash"
-
-	t, err := template.ParseFiles("views/login.html", "partials/head.html", "partials/foot.html", "partials/footer.html")
-
-	checkErr(err)
-
-	t.Execute(w, "login")
-
-}
-
 // GetAllTasks ...
 func GetAllTasks(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows := models.GetAllTasks(TblName)

@@ -12,10 +12,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// func favicon(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-// 	http.ServeFile(w, r, "static/img/golang_gopher.ico")
-// }
-
 // Server
 func main() {
 
@@ -31,7 +27,6 @@ func main() {
 	//This GetOneTask func is needed in order to properly select a rec to delete!
 	router.DELETE("/item/:id", handlers.DeleteOneTask)
 	router.POST("/", handlers.NewTask)
-	router.POST("/login", handlers.LoginForm)
 	router.ServeFiles("/static/*filepath", http.Dir("static"))
 	// router.GET("/favicon.ico", favicon)
 
@@ -39,15 +34,17 @@ func main() {
 
 	router.PUT("/item/:id", handlers.EditOneTask)
 
+	user := os.Getenv("TODOGOML_USERNAME")
+	pass := os.Getenv("TODOGOML_PASSWORD")
+
 	// Web Pages
-	router.GET("/", handlers.Login)
-	router.GET("/dash", handlers.Dash)
-	router.GET("/work", handlers.Work)
-	router.GET("/weekend", handlers.Weekend)
-	router.GET("/groceries", handlers.Groceries)
-	router.GET("/resolutions", handlers.Resolutions)
-	router.GET("/hobby", handlers.Hobby)
-	router.GET("/design", handlers.Design)
+	router.GET("/", handlers.BasicAuth(handlers.Dash, user, pass))
+	router.GET("/work", handlers.BasicAuth(handlers.Work, user, pass))
+	router.GET("/weekend", handlers.BasicAuth(handlers.Weekend, user, pass))
+	router.GET("/groceries", handlers.BasicAuth(handlers.Groceries, user, pass))
+	router.GET("/resolutions", handlers.BasicAuth(handlers.Resolutions, user, pass))
+	router.GET("/hobby", handlers.BasicAuth(handlers.Hobby, user, pass))
+	router.GET("/design", handlers.BasicAuth(handlers.Design, user, pass))
 
 	http.ListenAndServe(getPort(), router)
 }
